@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101311">
+<meta name="apple-mobile-web-app-title" content="Baseline">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 36 36%27%3E%3Crect width=%2736%27 height=%2736%27 rx=%279%27 fill=%27%2370e5a8%27/%3E%3Cg stroke=%27%23113923%27 stroke-width=%271.5%27 fill=%27none%27%3E%3Ccircle cx=%2718%27 cy=%2718%27 r=%2710%27/%3E%3Cpath d=%27M8 18h20M18 8v20M11 11q11 7 0 14m14-14q-11 7 0 14%27/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon.png">
+<title>Baseline · NBA Scores</title>
+<meta name="description" content="A daily basketball-inspired routine for mindset, mobility and training, with the latest NBA scores.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<script defer src="app.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap top-in">
+<a class="brand" href="./"><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#70e5a8"/><g stroke="#113923" stroke-width="1.5" fill="none"><circle cx="18" cy="18" r="10"/><path d="M8 18h20M18 8v20M11 11q11 7 0 14m14-14q-11 7 0 14"/></g></svg>BASELINE<span>.</span></a>
+<nav aria-label="Pages"><a href="./">Home</a><a href="exercises.html">Exercises</a><a href="scores.html" class="on" aria-current="page">NBA Scores</a></nav>
+<div class="top-end"><i></i> DAILY TRAINING CLUB</div>
+</div></header>
+<main class="wrap page">
+<section id="scores" aria-labelledby="scores-title">
+<div class="section-head"><div><div class="eyebrow"><span class="pip"></span> AROUND THE LEAGUE</div><h2 id="scores-title">NBA Scoreboard</h2></div><button type="button" class="jump" id="refresh">Refresh <span aria-hidden="true">↻</span></button></div>
+<div class="score-meta" id="score-status" role="status">Loading NBA scores…</div><div class="score-grid" id="score-grid"></div>
+<div class="score-foot"><button class="quiet" type="button" id="more" hidden>Show all games</button><a href="https://www.espn.com/nba/scoreboard" target="_blank" rel="noopener">Full ESPN scoreboard ↗</a></div>
+</section>
+<footer><span>BASELINE<span class="green">.</span> <small>DAILY TRAINING CLUB</small></span><small id="store-note">Scores from ESPN. Tap a game for the full box score.</small></footer>
+</main>
+</body>
+</html>

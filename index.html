@@ -7,247 +7,31 @@
 <meta name="apple-mobile-web-app-title" content="Baseline">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 36 36%27%3E%3Crect width=%2736%27 height=%2736%27 rx=%279%27 fill=%27%2370e5a8%27/%3E%3Cg stroke=%27%23113923%27 stroke-width=%271.5%27 fill=%27none%27%3E%3Ccircle cx=%2718%27 cy=%2718%27 r=%2710%27/%3E%3Cpath d=%27M8 18h20M18 8v20M11 11q11 7 0 14m14-14q-11 7 0 14%27/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icon.png">
-<title>Baseline — Daily Training</title>
+<title>Baseline</title>
 <meta name="description" content="A daily basketball-inspired routine for mindset, mobility and training, with the latest NBA scores.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
-<style>
-/* Layout: single dark court-green dashboard — masthead, two quote cards, knee checklist + check-in, scoreboard grid. Deliberately one (dark) theme, matching the original site. */
-:root{color-scheme:dark;--bg:#101311;--card:#191e1b;--line:#2b352f;--fg:#eef3ef;--muted:#a6b2a9;--green:#77e4a9;--display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;--body:Inter,system-ui,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:18px;background:var(--bg)}body{margin:0;background:radial-gradient(ellipse at 75% 0,#18281f 0,transparent 43rem),var(--bg);color:var(--fg);font:14px/1.5 var(--body);min-height:100%}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}button:disabled{opacity:.55;cursor:wait}[hidden]{display:none!important}:focus-visible{outline:2px solid var(--green);outline-offset:3px}
-.wrap{width:100%;max-width:1244px;margin:auto;padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}
-.top{background:#101512;border-bottom:1px solid #29352d}.top-in{height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:9px;font:800 28px/1 var(--display);letter-spacing:.045em}.brand svg{width:34px}.brand span{margin-left:-9px}.green,.brand span,h1 span{color:var(--green)}nav{display:flex;align-self:stretch;gap:29px}nav a{display:grid;place-items:center;border-bottom:2px solid transparent;color:var(--muted);font-size:13px;font-weight:600}nav a:hover,nav .on{border-color:var(--green);color:var(--green)}
-.top-end,.eyebrow,.tag,cite,.score-meta,.score-foot,footer small{font-size:11px;font-weight:700;letter-spacing:.115em}.top-end{color:var(--muted);white-space:nowrap}.top-end i,.pip{display:inline-block;background:var(--green);width:7px;height:7px;border-radius:50%;margin-right:5px}
-.mast{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:38px 0 25px}.eyebrow{color:var(--green);text-transform:uppercase}h1,h2,h3,p,blockquote{margin:0}h1{font:800 clamp(50px,7vw,90px)/.99 var(--display);text-transform:uppercase;letter-spacing:-.018em;margin:8px 0 9px;text-wrap:balance}.mast p,.panel-head p,.panel-foot{color:var(--muted)}
-.jump,.quiet{white-space:nowrap;border:1px solid #3b4b41;background:#1b251f;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:700}.jump span{color:var(--green);margin-left:7px}.jump:hover,.quiet:hover{background:#294236}
-.quotes,.training-grid{display:grid;gap:16px}.quotes{grid-template-columns:1.65fr 1fr}.quotes>*,.training-grid>*{min-width:0}
-.court,.wisdom{border:1px solid #376a4f;border-radius:14px;position:relative;overflow:hidden;min-height:229px;padding:25px 27px;display:flex;flex-direction:column;justify-content:center}.court{background:linear-gradient(105deg,#0c4c31,#136b43 65%,#155b3d)}.court-art{position:absolute;right:-10px;top:0;width:58%;height:100%;opacity:.68}.quote-content{position:relative;z-index:1;max-width:74%}.tag{color:#a2ecbd;display:flex;align-items:center;gap:8px}.tag span{width:15px;height:1px;background:currentColor;opacity:.7}.court blockquote{font:700 clamp(30px,4vw,54px)/.99 var(--display);margin:16px 0;max-width:470px;text-wrap:balance}
-.wisdom{border-color:#303d34;background:#1b231e}.wisdom .native{color:#a3edbf;font-size:24px;margin:12px 0 4px;font-weight:600;letter-spacing:.06em}.wisdom blockquote{font:600 28px/1.08 var(--display);margin:14px 0 12px;text-wrap:balance}.wisdom cite{color:var(--muted)}cite{font-style:normal;color:#d1efdc}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:29px 0 13px}h2{font:700 40px/1 var(--display);margin-top:4px}h3{font:700 25px/1 var(--display);margin-bottom:5px}
-.progress{width:min(175px,36%);text-align:right;font-size:11px;color:var(--muted)}.progress b{color:var(--green)}.track{height:5px;background:#313b34;border-radius:5px;overflow:hidden;margin-top:5px}.track span{display:block;width:0;height:100%;background:var(--green);transition:width .2s}
-.training-grid{grid-template-columns:1fr 1fr;align-items:start}.panel,.score-card{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}.panel-head{display:flex;align-items:center;gap:12px;padding:15px 16px;border-bottom:1px solid var(--line)}.icon{flex:none;width:38px;height:38px;display:grid;place-items:center;background:#203b2d;color:var(--green);border-radius:8px}.icon svg{width:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.panel-head p,.panel-foot{font-size:11px}
-.list-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:11px}.list-tools .quiet{padding:4px 9px}.list-tools .quiet:disabled{cursor:default}
-.check-row{position:relative;display:flex;gap:10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);cursor:pointer}.check-row:hover{background:#213127}.check-row input{flex:none;margin:0;width:18px;height:18px;accent-color:#69dc9f;cursor:pointer}.check-row b{font-size:13px;display:block}.check-row small{display:block;font-size:11px;color:var(--muted)}.check-row .dose{margin-left:auto;flex:none;color:#bed0c3;font-size:11px;text-align:right}.check-row:has(:checked){background:#1e3025}.check-row:has(:checked) b{color:#a4d1b5;text-decoration:line-through}.panel-foot{padding:9px 16px}
-.programme-notes{padding:16px}.programme-notes h3{margin-bottom:8px}.programme-notes label{display:block;margin-bottom:8px}.programme-notes select{width:100%;min-height:44px;margin-bottom:10px;border:1px solid #3b4b41;border-radius:8px;padding:6px 10px;background:#1b251f;color:var(--fg);font:inherit}
-.score-meta{color:var(--muted);font-size:10px;margin-bottom:9px}.score-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.score-card{padding:11px 13px;display:block}.score-card:hover{border-color:#6cb88a}.score-card.boston{border-color:#4d8b65}.game-status{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding-bottom:6px;border-bottom:1px solid var(--line)}.game-status.live,.winner strong{color:var(--green)}.team{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12px}.team img{width:21px;height:21px;object-fit:contain}.team strong{margin-left:auto;font-size:15px;font-variant-numeric:tabular-nums}
-.score-foot{display:flex;justify-content:end;align-items:center;gap:12px;margin:12px 0 24px;color:#b0e8c3;text-transform:uppercase}.score-foot a:hover{text-decoration:underline}
-footer{display:flex;justify-content:space-between;align-items:center;padding:16px 0 25px;border-top:1px solid var(--line);gap:16px}footer>span{font:700 20px/1 var(--display);letter-spacing:.04em}footer small{font-family:var(--body);color:var(--muted);font-size:9px}
-@media(max-width:760px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.top-end{display:none}.top-in{height:57px}.brand{font-size:23px}.brand svg{width:27px}nav{gap:14px}nav a{font-size:11px}.mast{padding-top:28px}.quotes,.training-grid{grid-template-columns:1fr}.court,.wisdom{min-height:auto;padding:20px}.court{min-height:170px}.score-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.list-tools .quiet{min-height:36px}.check-row b{overflow-wrap:anywhere}}
-@media(max-width:410px){.mast .jump{display:none}.top-in{gap:8px}nav{gap:10px}.score-grid{grid-template-columns:1fr}.panel-head{padding:11px 10px;gap:8px}.check-row{padding-inline:10px}footer>span small{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.track span{transition:none}}
-</style>
+<link rel="stylesheet" href="style.css">
+<script defer src="app.js"></script>
 </head>
 <body>
-
 <header class="top"><div class="wrap top-in">
-<a class="brand" href="#today"><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#70e5a8"/><g stroke="#113923" stroke-width="1.5" fill="none"><circle cx="18" cy="18" r="10"/><path d="M8 18h20M18 8v20M11 11q11 7 0 14m14-14q-11 7 0 14"/></g></svg>BASELINE<span>.</span></a>
-<nav aria-label="Dashboard"><a href="#today" class="on">Today</a><a href="#training">Training</a><a href="#scores">NBA Scores</a></nav>
+<a class="brand" href="./"><svg viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="9" fill="#70e5a8"/><g stroke="#113923" stroke-width="1.5" fill="none"><circle cx="18" cy="18" r="10"/><path d="M8 18h20M18 8v20M11 11q11 7 0 14m14-14q-11 7 0 14"/></g></svg>BASELINE<span>.</span></a>
+<nav aria-label="Pages"><a href="./" class="on" aria-current="page">Home</a><a href="exercises.html">Exercises</a><a href="scores.html">NBA Scores</a></nav>
 <div class="top-end"><i></i> DAILY TRAINING CLUB</div>
 </div></header>
-<main id="today" class="wrap">
-<div class="mast"><div><div class="eyebrow"><span class="pip"></span> <time id="today-date"></time></div><h1>Today’s Game Plan<span>.</span></h1><p>Your daily quotes, knee exercise checklist and NBA scores.</p></div><a class="jump" href="#training">View training <span aria-hidden="true">↓</span></a></div>
+<main class="wrap">
+<div class="mast"><div><div class="eyebrow"><span class="pip"></span> <time id="today-date"></time></div><h1>Welcome, Nick<span>.</span></h1><p>Today’s mindset, then pick where you’re heading.</p></div></div>
 <section class="quotes" aria-label="Daily mindset">
 <article class="court">
 <svg class="court-art" viewBox="0 0 360 230" fill="none" aria-hidden="true"><g stroke="#b6fbd0" stroke-opacity=".29" stroke-width="1.4"><rect x="74" y="14" width="286" height="202"/><path d="M360 82H275v66h85M360 36h-48a79 79 0 0 0 0 158h48M360 107h-15v16h15"/><circle cx="275" cy="115" r="33"/><path d="M143 14v202"/><circle cx="143" cy="115" r="39"/></g><g transform="rotate(-24 245 128)"><circle cx="245" cy="128" r="76" fill="#238250" stroke="#96f0b8" stroke-width="2"/><g stroke="#b5f9cc" stroke-width="1.5"><circle cx="245" cy="128" r="69" stroke-opacity=".34"/><path d="M169 128h152M245 52v152M192 74c48 28 48 80 0 108m106-108c-48 28-48 80 0 108"/></g></g></svg>
 <div class="quote-content"><div class="tag">01 <span></span> THE COURT MINDSET</div><blockquote id="court-quote">“Win the next possession.”</blockquote><cite id="court-credit">BASELINE · DAILY CUE</cite></div></article>
 <article class="wisdom"><div class="tag">02 <span></span> THE STOIC MIND</div><blockquote id="wisdom-quote">“The impediment to action advances action. What stands in the way becomes the way.”</blockquote><cite id="wisdom-credit">MARCUS AURELIUS · MEDITATIONS 5.20</cite></article>
 </section>
-<section id="training" aria-labelledby="training-title">
-<div class="section-head"><div><div class="eyebrow">KNEE RECOVERY</div><h2 id="training-title">Knee exercise plan</h2></div><div class="progress" aria-live="polite"><div><b id="progress-label">0 / 8</b> completed</div><div class="track" aria-hidden="true"><span id="progress-fill"></span></div></div></div>
-<div class="training-grid">
-<article class="panel"><div class="panel-head"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="13.5" cy="4" r="2"/><path d="m7 21 4-7 4 2 2 5M4 13l4-4 5-1 3 4h4m-9 2 2-6"/></svg></div><div><h3>Knee Exercises</h3><p>Your updated routine</p></div></div><div class="list-tools"><span id="mobility-count" aria-live="polite">0 of 8</span><button id="reset-mobility" class="quiet" type="button" aria-label="Reset knee exercise checklist">Reset</button></div><div id="mobility-list"></div><div class="panel-foot">Tick each exercise when you have completed its listed repetitions or hold.</div></article>
-<article class="panel programme-notes">
-<h3>Morning check-in</h3>
-<label for="knee-check">How does your knee feel today?</label>
-<select id="knee-check">
-<option value="">Choose how your knee feels</option>
-<option value="normal">No increased pain or stiffness</option>
-<option value="mild">Mild stiffness that settles quickly</option>
-<option value="persistent">Pain or stiffness persists into the day</option>
-</select>
-</article>
-</div>
-</section>
-<section id="scores" aria-labelledby="scores-title">
-<div class="section-head"><div><div class="eyebrow"><span class="pip"></span> AROUND THE LEAGUE</div><h2 id="scores-title">NBA Scoreboard</h2></div><button type="button" class="jump" id="refresh">Refresh <span aria-hidden="true">↻</span></button></div>
-<div class="score-meta" id="score-status" role="status">Loading NBA scores…</div><div class="score-grid" id="score-grid"></div>
-<div class="score-foot"><button class="quiet" type="button" id="more" hidden>Show all games</button><a href="https://www.espn.com/nba/scoreboard" target="_blank" rel="noopener">Full ESPN scoreboard ↗</a></div>
-</section>
-<footer><span>BASELINE<span class="green">.</span> <small>DAILY TRAINING CLUB</small></span><small id="store-note">Checklist progress and check-ins are saved in this browser.</small></footer>
+<nav class="home-links" aria-label="Go to">
+<a class="home-link" href="exercises.html"><div class="row"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="13.5" cy="4" r="2"/><path d="m7 21 4-7 4 2 2 5M4 13l4-4 5-1 3 4h4m-9 2 2-6"/></svg></div><h2>My Exercises</h2><span class="go" aria-hidden="true">→</span></div><p><b id="home-progress" class="green">0 / 8</b> knee exercises done today</p><div class="track" aria-hidden="true"><span id="progress-fill"></span></div></a>
+<a class="home-link" href="scores.html"><div class="row"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M6 5.5c4 3 4 10 0 13m12-13c-4 3-4 10 0 13"/></svg></div><h2>NBA Scores</h2><span class="go" aria-hidden="true">→</span></div><p>Latest results, live games and tonight’s schedule</p></a>
+</nav>
+<footer><span>BASELINE<span class="green">.</span> <small>DAILY TRAINING CLUB</small></span><small id="store-note">Your daily quotes change every morning.</small></footer>
 </main>
-
-<script>
-'use strict';
-const $ = id => document.getElementById(id);
-const el = (tag, cls, text) => { const i = document.createElement(tag); if (cls) i.className = cls; if (text !== undefined) i.textContent = text; return i; };
-const court = [
-  'Win the next possession.',
-  'The shot starts with your feet. The work starts before tip-off.',
-  'Miss the shot. Make the next play.',
-  'When the game speeds up, come back to your footwork.',
-  'Make the extra pass. Be the player who sees it.',
-  'Run the floor like the ball is coming to you.',
-  'Every good screen makes somebody better.',
-  'The next rep is yours to win.',
-  'Finish the drill the way you want to finish the fourth.',
-  'Be quick to help and quicker to recover.',
-  'Earn your confidence one clean rep at a time.',
-  'Stay ready for the pass nobody else expects.',
-  'Let your effort travel, even when your shot doesn’t.',
-  'The scoreboard can wait. Get back on defence.'
-];
-const wisdom = [
-  ['The impediment to action advances action. What stands in the way becomes the way.','MARCUS AURELIUS · MEDITATIONS 5.20'],
-  ['We suffer more often in imagination than in reality.','SENECA · LETTERS 13'],
-  ['First say to yourself what you would be; and then do what you have to do.','EPICTETUS · DISCOURSES 3.23'],
-  ['Waste no more time arguing about what a good man should be. Be one.','MARCUS AURELIUS · MEDITATIONS 10.16'],
-  ['It is not that we have a short time to live, but that we waste a lot of it.','SENECA · ON THE SHORTNESS OF LIFE'],
-  ['No great thing is created suddenly.','EPICTETUS · DISCOURSES 1.15'],
-  ['If it is not right, do not do it; if it is not true, do not say it.','MARCUS AURELIUS · MEDITATIONS 12.17'],
-  ['Men are disturbed not by things, but by the views which they take of things.','EPICTETUS · ENCHIRIDION 5'],
-  ['Begin at once to live, and count each separate day as a separate life.','SENECA · LETTERS 101'],
-  ['Such as are your habitual thoughts, such also will be the character of your mind.','MARCUS AURELIUS · MEDITATIONS 5.16'],
-  ['While we are postponing, life speeds by.','SENECA · LETTERS 1'],
-  ['It is difficulties that show what men are.','EPICTETUS · DISCOURSES 1.24'],
-  ['Confine yourself to the present.','MARCUS AURELIUS · MEDITATIONS 7.29'],
-  ['Very little is needed to make a happy life; it is all within yourself, in your way of thinking.','MARCUS AURELIUS · MEDITATIONS 7.67']
-];
-const mobility = [
-  ['Straight-Leg Tense, Lift & Hold','Keep your leg straight, tense it, lift and hold for 5 seconds.','3 × 5 sec'],
-  ['Seated Knee Straightening','Sit on a chair with your leg bent. Straighten and hold for 5 seconds.','3 × 5 sec'],
-  ['Standing Half Squats','Standing half squats.','3 × 20 reps'],
-  ['Lying Banded Leg Raise','Lying leg raises with a band.','3 × 15 reps'],
-  ['Side Glute Leg Raises','Side glute leg raises.','3 × 15 reps'],
-  ['Calf Stretch','Hold the calf stretch for 30 seconds.','30 sec'],
-  ['Lying Leg Slides','Lie on your back and slowly slide your heel in and out, bending and straightening the knee.','3 × 15 reps'],
-  ['Clam Shells','Lie on your side with knees bent and open your top knee while keeping your feet together.','3 × 15 reps']
-];
-const mobilityPrefix = 'knee-rehab-v1-';
-const localKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-const stamp = d => Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()) / 86400000;
-const fmt = new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'long'});
-let today, memory = {};
-function read(key){ if (Object.prototype.hasOwnProperty.call(memory,key)) return memory[key]; try { return JSON.parse(localStorage.getItem('baseline.v1.'+key)) || {}; } catch { return {}; } }
-function writeDay(key,list){ memory[key]=list; try { localStorage.setItem('baseline.v1.'+key,JSON.stringify(list)); } catch { $('store-note').textContent='Storage is unavailable. Progress lasts until you close or reload this page.'; } }
-function save(key,id,value){ writeDay(key,{...read(key),[id]:value}); }
-function resetList(key,prefix){ const list={...read(key)}; for (const id of Object.keys(list)) if (id.startsWith(prefix)) delete list[id]; writeDay(key,list); }
-function rows(target,items,key,prefix){
-  const checks=read(key);
-  $(target).replaceChildren(...items.map(([name,detail,dose],index)=>{
-    const id=prefix+index, label=el('label','check-row'), input=el('input');
-    input.type='checkbox'; input.id='ex-'+index; input.checked=checks[id]===true;
-    input.addEventListener('change',()=>{save(key,id,input.checked);updateProgress();});
-    const desc=el('span'); desc.append(el('b','',name),el('small','',detail));
-    label.append(input,desc,el('span','dose',dose)); return label;
-  }));
-}
-const completed=(key,items,prefix)=>{const log=read(key);return items.filter((_,i)=>log[prefix+i]===true).length;};
-function updateProgress(){
-  const count=completed(today,mobility,mobilityPrefix), total=mobility.length;
-  $('progress-label').textContent=`${count} / ${total}`;
-  $('progress-fill').style.width=`${100*count/total}%`;
-  $('mobility-count').textContent=`${count} of ${total}`;
-  $('reset-mobility').disabled=count===0;
-}
-function showRecovery(){ $('knee-check').value=read(today).knee ?? ''; }
-function showDay(){
-  const now=new Date();
-  if (today===localKey(now)) return;
-  today=localKey(now);
-  $('today-date').dateTime=today; $('today-date').textContent=fmt.format(now);
-  $('court-quote').textContent='“'+court[stamp(now)%court.length]+'”';
-  const [quote,credit]=wisdom[stamp(now)%wisdom.length];
-  $('wisdom-quote').textContent='“'+quote+'”';
-  $('wisdom-credit').textContent=credit;
-  rows('mobility-list',mobility,today,mobilityPrefix); updateProgress(); showRecovery();
-}
-
-const scoresUrl='https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
-const easternDate=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});
-function leagueDate(date){ return Object.fromEntries(easternDate.formatToParts(date).filter(p=>p.type!=='literal').map(p=>[p.type,p.value])); }
-function daysAgo(date,n){ const {year,month,day}=leagueDate(date); return new Date(Date.UTC(+year,+month-1,+day-n)).toISOString().slice(0,10).replace(/-/g,''); }
-const gameDay=g=>daysAgo(new Date(g.date),0);
-const boston=g=>g.competitions[0].competitors.some(x=>x.team.abbreviation==='BOS');
-const validGame=g=>/^\d+$/.test(g.id)&&Number.isFinite(Date.parse(g.date))&&g.status?.type&&g.competitions?.[0]?.competitors?.length===2;
-let games=[],expanded=false,fetching=false,lastFetch=0;
-async function getGames(query=''){
-  const ctrl=typeof AbortController==='function'?new AbortController():null;
-  const timer=ctrl?setTimeout(()=>ctrl.abort(),12000):0;
-  let response;
-  try{ response=await fetch(scoresUrl+query,ctrl?{signal:ctrl.signal,cache:'no-store'}:{cache:'no-store'}); }
-  finally{ clearTimeout(timer); }
-  if(!response.ok) throw Error('NBA feed unavailable');
-  const data=await response.json();
-  if(!Array.isArray(data.events)) throw Error('Unexpected NBA feed');
-  return data.events.filter(validGame);
-}
-function card(g){
-  const {type}=g.status, link=el('a','score-card'+(boston(g)?' boston':''));
-  link.href='https://www.espn.com/nba/game/_/gameId/'+g.id; link.target='_blank'; link.rel='noopener';
-  const time=new Intl.DateTimeFormat('en-GB',{weekday:'short',hour:'numeric',minute:'2-digit'}).format(new Date(g.date));
-  link.append(el('span','game-status'+(type.state==='in'?' live':''), type.state==='pre'?time:`${type.shortDetail||type.description} · ${time.split(' ')[0]}`));
-  const comps=[...g.competitions[0].competitors].sort((a,b)=>Number(a.homeAway==='home')-Number(b.homeAway==='home'));
-  for(const t of comps){
-    const row=el('span','team'+(t.winner?' winner':''));
-    const logo=t.team.logoDark||t.team.logo;
-    if(typeof logo==='string'&&logo.startsWith('https://a.espncdn.com/')){
-      const img=el('img'); img.alt=''; img.loading='lazy'; img.src=logo;
-      img.addEventListener('error',()=>img.remove(),{once:true}); row.append(img);
-    }
-    row.append(el('span','',String(t.team.shortDisplayName||t.team.abbreviation||'')),el('strong','',type.state==='pre'?'—':String(t.score??'—')));
-    link.append(row);
-  }
-  return link;
-}
-function renderScores(){
-  $('score-grid').replaceChildren(...(expanded?games:games.slice(0,3)).map(card));
-  $('more').hidden=games.length<=3;
-  $('more').textContent=expanded?'Show fewer games':`Show all ${games.length} games`;
-  $('more').setAttribute('aria-expanded',String(expanded));
-}
-async function fetchScores(){
-  if(fetching) return;
-  fetching=true; $('refresh').disabled=true;
-  if(!games.length) $('score-status').textContent='Loading NBA scores…';
-  try{
-    const now=new Date(), to=daysAgo(now,0);
-    let events=await getGames();
-    if(!events.some(e=>e.status.type.completed)){
-      const more=await Promise.allSettled([1,2].map(n=>getGames('?dates='+daysAgo(now,n))));
-      const known=new Map(events.map(e=>[e.id,e]));
-      for(const r of more) if(r.status==='fulfilled') for(const ev of r.value) if(!known.has(ev.id)) known.set(ev.id,ev);
-      events=[...known.values()];
-    }
-    const live=events.filter(e=>e.status.type.state==='in');
-    const finals=events.filter(e=>e.status.type.completed);
-    const finalDay=finals.map(gameDay).sort().slice(-1)[0];
-    const latest=finals.filter(e=>gameDay(e)===finalDay);
-    const upcoming=events.filter(e=>e.status.type.state==='pre'&&gameDay(e)===to);
-    const order=(a,b)=>Number(boston(b))-Number(boston(a))||Date.parse(b.date)-Date.parse(a.date);
-    games=[...live.sort(order),...latest.sort(order),...upcoming.sort(order)];
-    lastFetch=Date.now();
-    const updated=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-    $('score-status').textContent=games.length?`${live.length?'LIVE GAMES + ':''}${latest.length?'LATEST RESULTS':'TODAY’S GAMES'} · ESPN · UPDATED ${updated}`:'No recent NBA games found.';
-    renderScores();
-  }catch(err){
-    const why=err&&err.name==='AbortError'?' (ESPN took too long to answer)':'';
-    $('score-status').textContent=(games.length?'Update unavailable. Showing the last scores fetched.':'Scores are temporarily unavailable. Try Refresh or open ESPN.')+why;
-  }finally{
-    fetching=false; $('refresh').disabled=false;
-  }
-}
-function navState(){
-  const hash=['#today','#training','#scores'].includes(location.hash)?location.hash:'#today';
-  document.querySelectorAll('nav a').forEach(a=>{ const on=a.hash===hash; a.classList.toggle('on',on); on?a.setAttribute('aria-current','location'):a.removeAttribute('aria-current'); });
-}
-$('reset-mobility').addEventListener('click',()=>{ resetList(today,mobilityPrefix); rows('mobility-list',mobility,today,mobilityPrefix); updateProgress(); });
-$('knee-check').addEventListener('change',e=>{ save(today,'knee',e.target.value); showRecovery(); });
-$('refresh').addEventListener('click',fetchScores);
-$('more').addEventListener('click',()=>{ expanded=!expanded; renderScores(); });
-window.addEventListener('hashchange',navState);
-window.addEventListener('storage',e=>{ if(e.key?.startsWith('baseline.v1.')){ delete memory[e.key.slice(12)]; rows('mobility-list',mobility,today,mobilityPrefix); updateProgress(); showRecovery(); } });
-document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ showDay(); if(Date.now()-lastFetch>60000) fetchScores(); } });
-setInterval(()=>{ if(!document.hidden){ showDay(); fetchScores(); } },60000);
-showDay(); navState(); fetchScores();
-</script>
 </body>
 </html>
