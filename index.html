@@ -126,7 +126,7 @@ const localKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth()+1
 const stamp = d => Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()) / 86400000;
 const fmt = new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'long'});
 let today, memory = {};
-function read(key){ if (Object.hasOwn(memory,key)) return memory[key]; try { return JSON.parse(localStorage.getItem('baseline.v1.'+key)) || {}; } catch { return {}; } }
+function read(key){ if (Object.prototype.hasOwnProperty.call(memory,key)) return memory[key]; try { return JSON.parse(localStorage.getItem('baseline.v1.'+key)) || {}; } catch { return {}; } }
 function writeDay(key,list){ memory[key]=list; try { localStorage.setItem('baseline.v1.'+key,JSON.stringify(list)); } catch { $('store-note').textContent='Storage is unavailable. Progress lasts until you close or reload this page.'; } }
 function save(key,id,value){ writeDay(key,{...read(key),[id]:value}); }
 function resetList(key,prefix){ const list={...read(key)}; for (const id of Object.keys(list)) if (id.startsWith(prefix)) delete list[id]; writeDay(key,list); }
@@ -164,13 +164,17 @@ function showDay(){
 const scoresUrl='https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
 const easternDate=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});
 function leagueDate(date){ return Object.fromEntries(easternDate.formatToParts(date).filter(p=>p.type!=='literal').map(p=>[p.type,p.value])); }
-function daysAgo(date,n){ const {year,month,day}=leagueDate(date); return new Date(Date.UTC(+year,+month-1,+day-n)).toISOString().slice(0,10).replaceAll('-',''); }
+function daysAgo(date,n){ const {year,month,day}=leagueDate(date); return new Date(Date.UTC(+year,+month-1,+day-n)).toISOString().slice(0,10).replace(/-/g,''); }
 const gameDay=g=>daysAgo(new Date(g.date),0);
 const boston=g=>g.competitions[0].competitors.some(x=>x.team.abbreviation==='BOS');
 const validGame=g=>/^\d+$/.test(g.id)&&Number.isFinite(Date.parse(g.date))&&g.status?.type&&g.competitions?.[0]?.competitors?.length===2;
 let games=[],expanded=false,fetching=false,lastFetch=0;
 async function getGames(query=''){
-  const response=await fetch(scoresUrl+query,{signal:AbortSignal.timeout(9000)});
+  const ctrl=typeof AbortController==='function'?new AbortController():null;
+  const timer=ctrl?setTimeout(()=>ctrl.abort(),12000):0;
+  let response;
+  try{ response=await fetch(scoresUrl+query,ctrl?{signal:ctrl.signal,cache:'no-store'}:{cache:'no-store'}); }
+  finally{ clearTimeout(timer); }
   if(!response.ok) throw Error('NBA feed unavailable');
   const data=await response.json();
   if(!Array.isArray(data.events)) throw Error('Unexpected NBA feed');
@@ -215,7 +219,7 @@ async function fetchScores(){
     }
     const live=events.filter(e=>e.status.type.state==='in');
     const finals=events.filter(e=>e.status.type.completed);
-    const finalDay=finals.map(gameDay).sort().at(-1);
+    const finalDay=finals.map(gameDay).sort().slice(-1)[0];
     const latest=finals.filter(e=>gameDay(e)===finalDay);
     const upcoming=events.filter(e=>e.status.type.state==='pre'&&gameDay(e)===to);
     const order=(a,b)=>Number(boston(b))-Number(boston(a))||Date.parse(b.date)-Date.parse(a.date);
@@ -224,8 +228,9 @@ async function fetchScores(){
     const updated=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
     $('score-status').textContent=games.length?`${live.length?'LIVE GAMES + ':''}${latest.length?'LATEST RESULTS':'TODAY’S GAMES'} · ESPN · UPDATED ${updated}`:'No recent NBA games found.';
     renderScores();
-  }catch{
-    $('score-status').textContent=games.length?'Update unavailable. Showing the last scores fetched.':'Scores are temporarily unavailable. Try Refresh or open ESPN.';
+  }catch(err){
+    const why=err&&err.name==='AbortError'?' (ESPN took too long to answer)':'';
+    $('score-status').textContent=(games.length?'Update unavailable. Showing the last scores fetched.':'Scores are temporarily unavailable. Try Refresh or open ESPN.')+why;
   }finally{
     fetching=false; $('refresh').disabled=false;
   }
